@@ -1,5 +1,9 @@
 package com.springboot.jwttask.jwt;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +29,7 @@ public class JwtTokenProvider {
     private final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
     @Value("${springboot.jwt.secret}")
-    private  String secretKey = "@!#sfsd4tt24856!hj~,#@$ew2351\n";
+    private  String secretKey = "hrjsj@s142#g%eaig";
 
     private final long tokenValidMillisecond = 1000L*60*60; // 1시간 토큰 유효
 
@@ -41,15 +45,14 @@ public class JwtTokenProvider {
     }
 
     //jwt 토큰 생성
-    public String createToken(String name, List<String> roles) {
+    public String createToken(String email, List<String> roles) {
         //uid를 이용하여 jwt 생성
-        Claims claims = Jwts.claims().setSubject(name);
+        Claims claims = Jwts.claims().setSubject(email);
         //클레임에 "roles"라는 이름으로 역할 정보(roles 매개변수)를 추가
         claims.put("roles",roles);
 
         Date now = new Date();
-        String token;
-        token = Jwts.builder()
+        String token = Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime()+tokenValidMillisecond))

@@ -37,16 +37,16 @@ public class SignServiceImpl implements SignService {
         User user;
         if(roles.equalsIgnoreCase("admin")){
             user = User.builder()
-                    .email(signUpDto.getEmail())
-                    .number(signUpDto.getNumber())
+//                    .email(signUpDto.getEmail())
+//                    .number(signUpDto.getNumber())
                     .password(passwordEncoder.encode(signUpDto.getPassword()))
                     .name(signUpDto.getName())
                     .roles(Collections.singletonList("ROLE_ADMIN"))
                     .build();
         }else{
             user = User.builder()
-                    .email(signUpDto.getEmail())
-                    .number(signUpDto.getNumber())
+//                    .email(signUpDto.getEmail())
+//                    .number(signUpDto.getNumber())
                     .password(passwordEncoder.encode(signUpDto.getPassword()))
                     .name(signUpDto.getName())
                     .roles(Collections.singletonList("ROLE_babyLion"))
@@ -56,13 +56,13 @@ public class SignServiceImpl implements SignService {
         User savedbabyLion = userRepository.save(user);
 
         SignUpResultDto signUpResultDto = new SignUpResultDto();
-        logger.info("[getSignResultDto] babyLion 정보 들어왔는지 확인 후 결과값 주입");
+        logger.info("[getSignResultDto] user 정보 들어왔는지 확인 후 결과값 주입");
 
-        if(!savedbabyLion.getEmail().isEmpty()){
-            setSucces(signUpResultDto);
-        }else{
-            setFail(signUpResultDto);
-        }
+//        if(!savedbabyLion.getEmail().isEmpty()){
+//            setSucces(signUpResultDto);
+//        }else{
+//            setFail(signUpResultDto);
+//        }
 
         return signUpResultDto;
 
