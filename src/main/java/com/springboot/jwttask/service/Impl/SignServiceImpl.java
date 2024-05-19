@@ -1,9 +1,12 @@
+package com.springboot.jwttask.service.Impl;
+
 import com.springboot.jwttask.dto.CommonResponse;
 import com.springboot.jwttask.dto.SignDto.SignInResultDto;
 import com.springboot.jwttask.dto.SignDto.SignUpDto;
 import com.springboot.jwttask.dto.SignDto.SignUpResultDto;
 import com.springboot.jwttask.entity.User;
 import com.springboot.jwttask.repository.UserRepository;
+import com.springboot.jwttask.service.Impl.JwtProvider;
 import com.springboot.jwttask.service.SignService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +73,7 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public SignInResultDto SignIn(String email, String password)throws RuntimeException{
-        User user = userRepository.getByUserId(id);
+        User user = userRepository.getByUserId(String.valueOf(id));
         if(!passwordEncoder.matches(password, user.getPassword())){
             throw new RuntimeException();
         }
